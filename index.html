@@ -3,67 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QA Testing Website</title>
+    <title>Hotel Booking - QA Testing</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .container {
             width: 80%;
             margin: auto;
+            text-align: center;
         }
         .header {
             background-color: #333;
             color: white;
             padding: 10px;
-            text-align: center;
         }
-        .buttons {
-            margin-top: 20px;
+        .form-group {
+            margin: 20px 0;
         }
-        .btn {
-            padding: 10px;
+        .submit-btn {
             background-color: blue;
             color: white;
+            padding: 10px 20px;
             border: none;
             cursor: pointer;
-            margin-right: -30px; /* Intentional overlapping issue */
         }
-        .hidden-text {
-            color: white;
+        /* Usability Issues */
+        .hidden-label {
+            display: none; /* Issue 1: Hidden form labels */
+        }
+        .overlapping-text {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: red; /* Issue 2: Overlapping text */
         }
         .broken-image {
             width: 200px;
             height: 200px;
+        }
+        .tiny-text {
+            font-size: 8px; /* Issue 3: Text too small */
+        }
+        .non-clickable-button {
+            pointer-events: none; /* Issue 4: Button disabled without reason */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>QA Testing Page</h1>
+            <h1>Hotel Booking</h1>
         </div>
         
-        <h2>UI Issues</h2>
-        <button class="btn">Button 1</button>
-        <button class="btn">Button 2</button> <!-- Overlapping button -->
+        <h2>Book a Room</h2>
         
-        <p class="hidden-text">This text is hidden (white on white).</p>
+        <div class="form-group">
+            <label class="hidden-label">Full Name</label>
+            <input type="text" placeholder="Enter your name"> <!-- Issue 1: No visible label -->
+        </div>
         
-        <h2>Network Errors</h2>
-        <img src="missing-image.jpg" class="broken-image" alt="Broken Image"> <!-- 404 Error -->
+        <div class="form-group">
+            <label>Check-in Date</label>
+            <input type="date">
+        </div>
         
-        <script>
-            // Console Errors
-            console.log(undefinedVariable); // Undefined variable error
-            document.getElementById('nonExistent').innerText = "This element doesn't exist";
-            
-            // Fake Network Error (500)
-            fetch('https://jsonplaceholder.typicode.com/invalid-endpoint')
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Network Error:', error));
-        </script>
+        <div class="form-group">
+            <label>Check-out Date</label>
+            <input type="date">
+        </div>
+        
+        <div class="form-group">
+            <label>Room Type</label>
+            <select>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="suite">Suite</option>
+            </select>
+        </div>
+        
+        <button class="submit-btn non-clickable-button">Book Now</button> <!-- Issue 4: Button cannot be clicked -->
+        
+        <h2>Hotel Images</h2>
+        <img src="broken-hotel.jpg" class="broken-image" alt="Broken Image"> <!-- Issue 5: Missing image -->
+        
+        <p class="tiny-text">Terms and conditions apply. Please read before booking.</p> <!-- Issue 3: Tiny unreadable text -->
+        
+        <p class="overlapping-text">Special Offer: 50% Off!</p> <!-- Issue 2: Overlapping text on screen -->
     </div>
 </body>
 </html>
