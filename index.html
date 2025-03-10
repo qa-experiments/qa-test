@@ -43,8 +43,9 @@
             font-size: 18px;
         }
         /* Usability Issues */
-        .hidden-label {
-            display: none; /* Issue 1: Hidden form labels */
+        .misaligned-label {
+            display: block;
+            margin-left: 250px; /* Issue 1: Misaligned label, making it hard to associate with input */
         }
         .overlapping-text {
             position: absolute;
@@ -83,8 +84,8 @@
         <p class="overlapping-text">Limited Time Offer: 50% Off!</p> <!-- Issue 2: Overlapping text -->
         
         <div class="form-group">
-            <label class="hidden-label">Full Name</label>
-            <input type="text" class="input-field" placeholder="Enter your name"> <!-- Issue 1: No visible label -->
+            <label class="misaligned-label">Full Name</label>
+            <input type="text" class="input-field" placeholder="Enter your name"> <!-- Issue 1: Misaligned label -->
         </div>
         
         <div class="form-group">
