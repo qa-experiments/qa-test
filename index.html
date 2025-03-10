@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking - QA Testing</title>
+    <title>Luxury Hotel Booking - QA Testing</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f8f8;
         }
         .container {
             width: 80%;
             margin: auto;
             text-align: center;
+            padding: 20px;
         }
         .header {
-            background-color: #333;
+            background: url('hotel-banner.jpg') no-repeat center center/cover;
+            height: 300px;
             color: white;
-            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
         }
         .form-group {
             margin: 20px 0;
         }
+        .input-field {
+            width: 60%;
+            padding: 10px;
+            margin: 10px;
+        }
         .submit-btn {
             background-color: blue;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
             cursor: pointer;
+            font-size: 18px;
         }
         /* Usability Issues */
         .hidden-label {
@@ -36,48 +48,58 @@
         }
         .overlapping-text {
             position: absolute;
-            top: 30px;
+            top: 20px;
             left: 30px;
-            color: red; /* Issue 2: Overlapping text */
-        }
-        .broken-image {
-            width: 200px;
-            height: 200px;
+            color: red;
+            font-size: 20px; /* Issue 2: Overlapping text */
         }
         .tiny-text {
-            font-size: 8px; /* Issue 3: Text too small */
+            font-size: 6px; /* Issue 3: Text too small */
         }
         .non-clickable-button {
             pointer-events: none; /* Issue 4: Button disabled without reason */
         }
+        .broken-image {
+            width: 300px;
+            height: 200px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Luxury Hotel Booking</h1>
+    </div>
+    
     <div class="container">
-        <div class="header">
-            <h1>Hotel Booking</h1>
-        </div>
-        
-        <h2>Book a Room</h2>
+        <h2>Book Your Stay</h2>
+        <p class="overlapping-text">Limited Time Offer: 50% Off!</p> <!-- Issue 2: Overlapping text -->
         
         <div class="form-group">
             <label class="hidden-label">Full Name</label>
-            <input type="text" placeholder="Enter your name"> <!-- Issue 1: No visible label -->
+            <input type="text" class="input-field" placeholder="Enter your name"> <!-- Issue 1: No visible label -->
         </div>
         
         <div class="form-group">
             <label>Check-in Date</label>
-            <input type="date">
+            <input type="date" class="input-field">
         </div>
         
         <div class="form-group">
             <label>Check-out Date</label>
-            <input type="date">
+            <input type="date" class="input-field">
         </div>
         
         <div class="form-group">
             <label>Room Type</label>
-            <select>
+            <select class="input-field">
                 <option value="single">Single</option>
                 <option value="double">Double</option>
                 <option value="suite">Suite</option>
@@ -86,12 +108,23 @@
         
         <button class="submit-btn non-clickable-button">Book Now</button> <!-- Issue 4: Button cannot be clicked -->
         
-        <h2>Hotel Images</h2>
-        <img src="broken-hotel.jpg" class="broken-image" alt="Broken Image"> <!-- Issue 5: Missing image -->
+        <h2>Gallery</h2>
+        <img src="missing-hotel.jpg" class="broken-image" alt="Broken Hotel Image"> <!-- Issue 5: Missing image -->
         
-        <p class="tiny-text">Terms and conditions apply. Please read before booking.</p> <!-- Issue 3: Tiny unreadable text -->
+        <h2>About Our Hotel</h2>
+        <p>Experience the best luxury stay with us. Our hotel offers world-class amenities and breathtaking views.</p>
         
-        <p class="overlapping-text">Special Offer: 50% Off!</p> <!-- Issue 2: Overlapping text on screen -->
+        <h2>Guest Reviews</h2>
+        <div class="review">
+            <p class="tiny-text">Amazing stay! Highly recommended!</p> <!-- Issue 3: Tiny unreadable text -->
+        </div>
+        <div class="review">
+            <p class="tiny-text">Loved the service and food.</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 Luxury Hotel. All rights reserved.</p>
     </div>
 </body>
 </html>
