@@ -72,6 +72,24 @@
             bottom: 0;
             width: 100%;
         }
+        /* Additional Issues */
+        .hidden-text {
+            visibility: hidden; /* Issue 5: Important text is hidden */
+        }
+        .wrong-color {
+            color: white; /* Issue 6: White text on white background */
+        }
+        .unclickable-link {
+            pointer-events: none; /* Issue 7: Link cannot be clicked */
+        }
+        .overlapping-button {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+        .large-empty-space {
+            height: 500px; /* Issue 8: Unnecessary large space */
+        }
     </style>
 </head>
 <body>
@@ -110,10 +128,10 @@
         <button class="submit-btn non-clickable-button">Book Now</button> <!-- Issue 4: Button cannot be clicked -->
         
         <h2>Gallery</h2>
-        <img src="missing-hotel.jpg" class="broken-image" alt="Hotel Image"> <!-- Issue 5: Missing image -->
+        <img src="missing-hotel.jpg" class="broken-image" alt="Broken Hotel Image"> <!-- Issue 5: Missing image -->
         
         <h2>About Our Hotel</h2>
-        <p>Experience the best luxury stay with us. Our hotel offers world-class amenities and breathtaking views.</p>
+        <p class="hidden-text">This text should be visible but is hidden.</p> <!-- Issue 5: Hidden text -->
         
         <h2>Guest Reviews</h2>
         <div class="review">
@@ -122,6 +140,10 @@
         <div class="review">
             <p class="tiny-text">Loved the service and food.</p>
         </div>
+        
+        <a href="#" class="unclickable-link">This link does nothing</a> <!-- Issue 7: Unclickable link -->
+        <button class="overlapping-button">Overlapping Button</button> <!-- Issue 8: Button overlapping -->
+        <div class="large-empty-space"></div> <!-- Issue 9: Large empty space -->
     </div>
     
     <div class="footer">
