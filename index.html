@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: #f8f8f8;
+            color: #333;
         }
         .container {
             width: 80%;
@@ -25,14 +26,22 @@
             align-items: center;
             justify-content: center;
             font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
         }
-        .form-group {
+        .section {
+            background-color: white;
             margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        .input-field {
-            width: 60%;
+        .input-field, select, textarea {
+            width: 90%;
             padding: 10px;
             margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         .submit-btn {
             background-color: blue;
@@ -41,28 +50,30 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
+            border-radius: 5px;
+        }
+        .submit-btn:hover {
+            background-color: darkblue;
         }
         /* Usability Issues */
-        .misaligned-label {
-            display: block;
-            margin-left: 250px; /* Issue 1: Misaligned label, making it hard to associate with input */
+        .hidden-text {
+            visibility: hidden; /* Issue 1: Important text is hidden */
         }
-        .overlapping-text {
+        .wrong-color {
+            color: white; /* Issue 2: White text on white background */
+        }
+        .unclickable-link {
+            pointer-events: none; /* Issue 3: Link cannot be clicked */
+            color: gray;
+        }
+        .overlapping-button {
             position: absolute;
-            top: 20px;
-            left: 30px;
-            color: red;
-            font-size: 20px; /* Issue 2: Overlapping text */
+            top: 50px;
+            left: 50px;
+            z-index: 10;
         }
-        .tiny-text {
-            font-size: 6px; /* Issue 3: Text too small */
-        }
-        .non-clickable-button {
-            pointer-events: none; /* Issue 4: Button disabled without reason */
-        }
-        .broken-image {
-            width: 300px;
-            height: 200px;
+        .large-empty-space {
+            height: 500px; /* Issue 4: Unnecessary large space */
         }
         .footer {
             background-color: #333;
@@ -72,24 +83,6 @@
             bottom: 0;
             width: 100%;
         }
-        /* Additional Issues */
-        .hidden-text {
-            visibility: hidden; /* Issue 5: Important text is hidden */
-        }
-        .wrong-color {
-            color: white; /* Issue 6: White text on white background */
-        }
-        .unclickable-link {
-            pointer-events: none; /* Issue 7: Link cannot be clicked */
-        }
-        .overlapping-button {
-            position: absolute;
-            top: 50px;
-            left: 50px;
-        }
-        .large-empty-space {
-            height: 500px; /* Issue 8: Unnecessary large space */
-        }
     </style>
 </head>
 <body>
@@ -98,52 +91,69 @@
     </div>
     
     <div class="container">
-        <h2>Book Your Stay</h2>
-        <p class="overlapping-text">Limited Time Offer: 50% Off!</p> <!-- Issue 2: Overlapping text -->
-        
-        <div class="form-group">
-            <label class="misaligned-label">Full Name</label>
-            <input type="text" class="input-field" placeholder="Enter your name"> <!-- Issue 1: Misaligned label -->
-        </div>
-        
-        <div class="form-group">
+        <div class="section">
+            <h2>Book Your Stay</h2>
+            <p class="hidden-text">This text should be visible but is hidden.</p> <!-- Issue 1: Hidden text -->
+            
+            <label>Full Name</label>
+            <input type="text" class="input-field" placeholder="Enter your name">
+
             <label>Check-in Date</label>
             <input type="date" class="input-field">
-        </div>
-        
-        <div class="form-group">
+
             <label>Check-out Date</label>
             <input type="date" class="input-field">
-        </div>
-        
-        <div class="form-group">
+            
             <label>Room Type</label>
             <select class="input-field">
                 <option value="single">Single</option>
                 <option value="double">Double</option>
                 <option value="suite">Suite</option>
             </select>
+            
+            <button class="submit-btn">Book Now</button>
         </div>
         
-        <button class="submit-btn non-clickable-button">Book Now</button> <!-- Issue 4: Button cannot be clicked -->
-        
-        <h2>Gallery</h2>
-        <img src="missing-hotel.jpg" class="broken-image" alt="Broken Hotel Image"> <!-- Issue 5: Missing image -->
-        
-        <h2>About Our Hotel</h2>
-        <p class="hidden-text">This text should be visible but is hidden.</p> <!-- Issue 5: Hidden text -->
-        
-        <h2>Guest Reviews</h2>
-        <div class="review">
-            <p class="tiny-text">Amazing stay! Highly recommended!</p> <!-- Issue 3: Tiny unreadable text -->
+        <div class="section">
+            <h2>Gallery</h2>
+            <img src="missing-hotel.jpg" class="broken-image" alt="Broken Hotel Image"> <!-- Issue 5: Missing image -->
         </div>
-        <div class="review">
+        
+        <div class="section">
+            <h2>Guest Reviews</h2>
+            <p class="tiny-text">Amazing stay! Highly recommended!</p>
             <p class="tiny-text">Loved the service and food.</p>
         </div>
         
-        <a href="#" class="unclickable-link">This link does nothing</a> <!-- Issue 7: Unclickable link -->
-        <button class="overlapping-button">Overlapping Button</button> <!-- Issue 8: Button overlapping -->
-        <div class="large-empty-space"></div> <!-- Issue 9: Large empty space -->
+        <div class="section">
+            <h2>Special Offers</h2>
+            <p class="wrong-color">This offer is available for a limited time!</p> <!-- Issue 2: White text on white background -->
+        </div>
+        
+        <div class="section">
+            <h2>Contact Us</h2>
+            <textarea class="input-field" rows="4" placeholder="Write your message..."></textarea>
+            <button class="submit-btn">Send Message</button>
+        </div>
+        
+        <div class="section">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>What is the check-in time?</summary>
+                <p>Check-in starts at 3 PM.</p>
+            </details>
+            <details>
+                <summary>Is breakfast included?</summary>
+                <p>Yes, breakfast is complimentary for all guests.</p>
+            </details>
+        </div>
+        
+        <div class="section">
+            <h2>Social Media</h2>
+            <a href="#" class="unclickable-link">Follow us on Twitter</a> <!-- Issue 3: Unclickable link -->
+        </div>
+        
+        <div class="large-empty-space"></div> <!-- Issue 4: Large empty space -->
     </div>
     
     <div class="footer">
