@@ -52,6 +52,21 @@
             border: 1px solid #ccc;
             margin-top: 10px;
         }
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .product img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+        }
+        .product select {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -60,22 +75,46 @@
         
         <div class="product-list">
             <h2>Products</h2>
-            <p>Item 1 - $10</p>
-            <p>Item 2 - $20</p>
-            <p>Item 3 - $30</p>
-            <div class="product-options">
-                <label>Choose Size:</label>
+            <div class="product">
+                <img src="item1.jpg" alt="Item 1">
+                <span>Item 1 - $10</span>
                 <select>
                     <option>Small</option>
                     <option>Medium</option>
                     <option>Large</option>
                 </select>
+                <button onclick="addToCart('Item 1 - $10')">Add to Cart</button>
             </div>
-            <div class="product-options">
-                <label>Choose Delivery Date:</label>
-                <input type="date">
+            <div class="product">
+                <img src="item2.jpg" alt="Item 2">
+                <span>Item 2 - $20</span>
+                <select>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                </select>
+                <button onclick="addToCart('Item 2 - $20')">Add to Cart</button>
             </div>
-            <button onclick="addToCart()">Add to Cart</button>
+            <div class="product">
+                <img src="item3.jpg" alt="Item 3">
+                <span>Item 3 - $30</span>
+                <select>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                </select>
+                <button onclick="addToCart('Item 3 - $30')">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="item4.jpg" alt="Item 4">
+                <span>Item 4 - $40</span>
+                <select>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                </select>
+                <button onclick="addToCart('Item 4 - $40')">Add to Cart</button>
+            </div>
         </div>
         
         <div class="cart">
@@ -99,16 +138,16 @@
     </div>
 
     <script>
-        let cartEmpty = true;
+        let cartItems = [];
         
-        function addToCart() {
-            document.getElementById("cart-items").innerText = "Item 1 - $10";
-            cartEmpty = false;
+        function addToCart(item) {
+            cartItems.push(item);
+            document.getElementById("cart-items").innerText = cartItems.join(", ");
         }
         
         function checkout() {
             // CRITICAL BUG: Users can proceed to payment even if the cart is empty
-            if (!cartEmpty) {
+            if (cartItems.length > 0) {
                 alert("Proceeding to Payment...");
             }
         }
