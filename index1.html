@@ -31,15 +31,26 @@
             font-size: 16px;
             border: none;
             cursor: pointer;
+            border-radius: 5px;
         }
         .checkout-btn:hover {
             background-color: darkgreen;
+        }
+        .product-options {
+            margin-top: 15px;
         }
         .footer {
             background-color: #333;
             color: white;
             padding: 15px;
             text-align: center;
+        }
+        select, input[type="date"] {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -52,6 +63,18 @@
             <p>Item 1 - $10</p>
             <p>Item 2 - $20</p>
             <p>Item 3 - $30</p>
+            <div class="product-options">
+                <label>Choose Size:</label>
+                <select>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                </select>
+            </div>
+            <div class="product-options">
+                <label>Choose Delivery Date:</label>
+                <input type="date">
+            </div>
             <button onclick="addToCart()">Add to Cart</button>
         </div>
         
@@ -62,6 +85,11 @@
         
         <div class="checkout">
             <h2>Checkout</h2>
+            <h3>Payment Method</h3>
+            <label><input type="radio" name="payment" value="credit"> Credit Card</label>
+            <label><input type="radio" name="payment" value="paypal"> PayPal</label>
+            <label><input type="radio" name="payment" value="cash"> Cash on Delivery</label>
+            <br><br>
             <button class="checkout-btn" onclick="checkout()">Proceed to Payment</button>
         </div>
     </div>
@@ -80,9 +108,7 @@
         
         function checkout() {
             // CRITICAL BUG: Users can proceed to payment even if the cart is empty
-            if (cartEmpty) {
-                alert("Critical Bug: Checkout allowed with an empty cart!");
-            } else {
+            if (!cartEmpty) {
                 alert("Proceeding to Payment...");
             }
         }
