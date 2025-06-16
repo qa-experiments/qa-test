@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal CMS Permissions System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The infographic tells a story in four acts: 1. The "Why" (Problem vs. Solution) to establish the business case. 2. The "How" (System Architecture) using an interactive HTML flowchart for clarity. 3. The "What" (MVP Feature) with a UI mockup and a chart visualizing the success metrics. 4. The "Future" (Roadmap & Risks) using a timeline and a risk impact chart. This narrative structure is more engaging and intuitive for understanding the project than simply replicating the slide deck, guiding the user from the high-level concept to the specific implementation details and future plans. -->
+    <!-- Visualization & Content Choices: 
+        - Problem/Opportunity: Goal: Inform. Method: Styled Unicode icons (HTML/CSS). Interaction: Hover. Justification: Quick, lightweight visual cues for the core business case.
+        - Permissions Flowchart: Goal: Organize. Method: HTML/CSS with Tailwind. Interaction: Click to reveal text. Justification: Best non-SVG/Mermaid method to clearly explain the system's logic.
+        - Success Metrics: Goal: Compare. Method: Chart.js Donut Chart. Interaction: Tooltips. Justification: Engages users by visualizing the composition of the project's goals.
+        - MVP Roadmap: Goal: Organize. Method: HTML/CSS timeline. Interaction: Static. Justification: A clear, linear way to show what's included now versus later.
+        - Technical Risks: Goal: Compare. Method: Chart.js Bar Chart. Interaction: None. Justification: A simple way to visually compare the impact of different technical challenges.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-element {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .flowchart-element:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .arrow {
+            position: relative;
+            width: 2px;
+            background-color: #64748b; /* slate-500 */
+            margin: 1rem auto;
+        }
+        .arrow::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #64748b; /* slate-500 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#0B2447]">Internal CMS Permissions Platform</h1>
+            <p class="mt-4 text-lg md:text-xl text-[#19376D]">A strategic overview of our new system for secure, efficient, and compliant access control.</p>
+        </header>
+
+        <main>
+            <section id="why" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B2447]">The Challenge & The Opportunity</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-400">
+                        <h3 class="text-2xl font-bold text-red-500 mb-4">The Problem</h3>
+                        <p class="mb-4 text-slate-600">Our current system lacks granular access control, leading to significant risks and inefficiencies.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-3xl">🔓</span>
+                                <div>
+                                    <h4 class="font-semibold">Data & Security Risks</h4>
+                                    <p class="text-sm text-slate-500">Risk of data leaks and unauthorized access to sensitive advertiser information.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-3xl">⏳</span>
+                                <div>
+                                    <h4 class="font-semibold">Operational Delays</h4>
+                                    <p class="text-sm text-slate-500">Manual permission changes create bottlenecks and slow down team operations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#576CBC]">
+                        <h3 class="text-2xl font-bold text-[#19376D] mb-4">The Solution</h3>
+                        <p class="mb-4 text-slate-600">A new, robust permissions system will provide foundational improvements.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-3xl">🛡️</span>
+                                <div>
+                                    <h4 class="font-semibold">Enhanced Data Privacy</h4>
+                                    <p class="text-sm text-slate-500">Isolate advertiser data and ensure users only see what they need to.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-3xl">🚀</span>
+                                <div>
+                                    <h4 class="font-semibold">Increased Efficiency</h4>
+                                    <p class="text-sm text-slate-500">Enable dynamic role management for quick onboarding and access control.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B2447]">How The System Works</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                        <div class="lg:col-span-2">
+                            <div class="text-center">
+                                <div id="fc-user" class="flowchart-element bg-[#A5D7E8] text-[#0B2447] inline-block py-3 px-6 rounded-lg font-bold">👤 User Request</div>
+                                <div class="arrow" style="height: 2rem;"></div>
+                                <div class="flex justify-around">
+                                    <div class="w-2/5">
+                                        <div id="fc-role" class="flowchart-element bg-[#576CBC] text-white p-4 rounded-lg">
+                                            <h4 class="font-bold">Role Inheritance</h4>
+                                            <p class="text-xs mt-1">Permissions from assigned roles</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-2/5">
+                                        <div id="fc-direct" class="flowchart-element bg-[#576CBC] text-white p-4 rounded-lg">
+                                            <h4 class="font-bold">Direct Permissions</h4>
+                                            <p class="text-xs mt-1">Specific overrides or exceptions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-around">
+                                    <div class="w-2/5"><div class="arrow" style="height: 2rem;"></div></div>
+                                    <div class="w-2/5"><div class="arrow" style="height: 2rem;"></div></div>
+                                </div>
+                                <div class="w-full h-px bg-slate-400 mt-4 mb-8 mx-auto" style="width: 60%;"></div>
+                                <div id="fc-eval" class="flowchart-element bg-[#19376D] text-white py-3 px-6 rounded-lg font-bold">⚙️ Permission Evaluation</div>
+                                <div class="arrow" style="height: 2rem;"></div>
+                                <div id="fc-scope" class="flowchart-element bg-slate-200 text-slate-800 p-4 rounded-lg">
+                                    <h4 class="font-bold">Scoped Access</h4>
+                                    <p class="text-sm mt-1">Access is granularly controlled by <span class="font-semibold text-[#19376D]">Resource</span> & <span class="font-semibold text-[#19376D]">Advertiser</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="flowchart-details" class="bg-slate-50 p-6 rounded-lg h-full border border-slate-200">
+                             <h4 class="font-bold text-lg mb-2 text-[#0B2447]">Click a step to learn more</h4>
+                             <p class="text-slate-600">Our system uses a dual approach to provide both structure and flexibility, ensuring access is always appropriate.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="what" class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B2447]">MVP In Focus: Permission Log Viewer</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-[#19376D]">Key Features</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-xl text-[#576CBC]">🗂️</span>
+                                <div>
+                                    <h4 class="font-semibold">Centralized Audit Logging</h4>
+                                    <p class="text-sm text-slate-500">A comprehensive backend for all permission changes.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-xl text-[#576CBC]">🔍</span>
+                                <div>
+                                    <h4 class="font-semibold">Advanced Search & Filter UI</h4>
+                                    <p class="text-sm text-slate-500">Filter by user, role, action, and date.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start space-x-3">
+                                <span class="text-xl text-[#576CBC]">💡</span>
+                                <div>
+                                    <h4 class="font-semibold">Detailed Event Insights</h4>
+                                    <p class="text-sm text-slate-500">Expandable entries show if access is direct or inherited.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-[#19376D]">Success Metric Breakdown</h3>
+                        <div class="chart-container" style="height: 250px; max-height: 250px;">
+                            <canvas id="successMetricsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="future">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B2447]">Roadmap & Risks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-6 text-[#19376D]">Project Roadmap</h3>
+                        <div class="relative pl-6">
+                            <div class="absolute left-0 h-full w-0.5 bg-slate-300"></div>
+                            <div class="mb-8 relative">
+                                <div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-[#19376D] border-4 border-white"></div>
+                                <h4 class="font-bold text-[#19376D]">In MVP</h4>
+                                <p class="text-sm text-slate-600">Core audit logging and a filterable UI for viewing logs.</p>
+                            </div>
+                             <div class="relative">
+                                <div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-slate-400 border-4 border-white"></div>
+                                <h4 class="font-bold text-slate-500">Deferred</h4>
+                                <p class="text-sm text-slate-600">Real-time alerts, advanced analytics, and bulk import tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold mb-4 text-[#19376D]">Technical Risk Assessment</h3>
+                        <div class="chart-container" style="height: 250px; max-height: 250px;">
+                            <canvas id="risksChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapLabel = (label) => {
+            if (label.length <= 16) {
+                return label;
+            }
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        };
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const flowchartDetails = document.getElementById('flowchart-details');
+        const defaultFlowchartHTML = flowchartDetails.innerHTML;
+
+        const flowchartContent = {
+            'fc-user': {
+                title: 'User Request',
+                text: 'The process begins when any user attempts to access a resource within the CMS, such as a Campaign or a Report.'
+            },
+            'fc-role': {
+                title: 'Role Inheritance',
+                text: 'The system first checks the permissions granted by the roles assigned to the user. This is the primary method for granting access.'
+            },
+            'fc-direct': {
+                title: 'Direct Permissions',
+                text: 'For special cases, the system checks for any permissions assigned directly to the user, which can override role-based settings.'
+            },
+            'fc-eval': {
+                title: 'Permission Evaluation',
+                text: 'The system combines both inherited and direct permissions to make a final access decision: Grant or Deny.'
+            },
+            'fc-scope': {
+                title: 'Scoped Access',
+                text: 'All permissions are granularly scoped. Access can be limited to a specific resource (e.g., Reports) AND a specific advertiser to ensure data privacy.'
+            }
+        };
+
+        document.querySelectorAll('.flowchart-element').forEach(el => {
+            el.addEventListener('click', () => {
+                const content = flowchartContent[el.id];
+                if (content) {
+                    flowchartDetails.innerHTML = `
+                        <h4 class="font-bold text-lg mb-2 text-[#0B2447]">${content.title}</h4>
+                        <p class="text-slate-600">${content.text}</p>
+                    `;
+                }
+            });
+        });
+        
+        const ctxSuccess = document.getElementById('successMetricsChart').getContext('2d');
+        new Chart(ctxSuccess, {
+            type: 'doughnut',
+            data: {
+                labels: ['Reduced Investigation Time', 'High User Satisfaction', '100% Log Coverage'],
+                datasets: [{
+                    label: 'Success Metrics',
+                    data: [60, 25, 15],
+                    backgroundColor: ['#19376D', '#576CBC', '#A5D7E8'],
+                    borderColor: '#fff',
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                             color: '#475569'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxRisks = document.getElementById('risksChart').getContext('2d');
+        new Chart(ctxRisks, {
+            type: 'bar',
+            data: {
+                labels: ['Data Volume', 'Query Performance', 'Data Integrity', 'Integration'],
+                datasets: [{
+                    label: 'Perceived Impact',
+                    data: [80, 85, 95, 70],
+                    backgroundColor: ['#A5D7E8', '#576CBC', '#19376D', '#0B2447'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                         ticks: {
+                             color: '#475569'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                         ticks: {
+                             color: '#475569'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
